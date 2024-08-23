@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decodificador Alura</title>
+    <link rel="icon" href="images/logo-alura.svg" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-wrapper">
+        <div class="header-firstSection-wrapper">
+            <header>
+                <img id="logo-alura" class="logo-alura" unselectable="on" src="images/logo-alura.svg" alt="Alura Logo" >
+            </header>
+            
+            <section class="input">
+                <textarea id="msg-input" placeholder="Digite seu texto" cols="3" rows="3"></textarea>
+                
+                <div class="btns">
+                    <div class="attention">
+                        <img src="images/exclamation-circle.svg" alt="Attention">
+                        <span>Apenas letras minúsculas e sem acento.</span>
+                    </div>
+                    <div class="btns-encrypt-decrypt">
+                     <!-- São duas Classes 1-btn. 2-encrypt -->
+                        <button id="encrypt" class="btn encrypt">Criptografar</button>
+                        <button id="decrypt" class="btn decrypt">Descriptografar</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <section id="output" class="output">
+            <div class="msgNotFound fade-in">
+                <img class="imgMsgNotFound" src="images/no-message-found-blue.svg" alt="Message not Found">
+                <h3>Nenhuma mensagem encontrada</h3>
+                <p>Digite um texto que você deseja criptografar ou descriptografar.</p>
+            </div>
+        </section>
+    </div>
+    <footer>
+        <ul>
+            <li>© Desenvolvido por Giovanni Silva</li>
+            <li>|</li>
+            <li>
+                <a href="https://github.com/giogsilva" target="_blank"><img src="images/github-icon.svg" alt="Logo do GitHub">
+                    GitHub
+                </a>
+            </li>
+            <li>
+                <a href="https://linkedin.com/in/giovannisilva29" target="_blank"><img src="images/linkedin-icon.svg" alt="Logo do LinkedIn">
+                    LinkedIn
+                </a>
+            </li>
+        </ul>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>

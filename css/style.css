@@ -1,0 +1,519 @@
+:root {
+    /* VARIÁVEIS */
+    /* Paleta de cores*/
+
+    --project-background-color: #f3f5fc;
+
+    --button-criptografar-and-text-color: #0a3871;
+    --button-descriptografar-color: #d8dfe8;
+
+    --white-color: #ffffff;
+    --gray-500-color: #343a40;
+    --gray-400-color: #495057;
+    --gray-300-color: #868e96;
+
+    /* Coloca o tamanho da Fonte na raiz do Projeto*/
+    font-size: 62.5%;
+}
+
+/* "*" (seletor universal)*/
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+/* OBS: "height: 100vh"(vh = viewport height) Define a altura de um elemento como
+100% da altura da viewport.  o elemento a ocupar toda a altura da janela do navegador,
+independentemente do conteúdo dentro dele.*/
+
+/* OBS-2: "text-rendering: optimizeLegibility" É usada para melhorar a 
+legibilidade do texto em um elemento, aplicando técnicas de renderização
+de texto específicas.
+É importante observar que nem todos os navegadores suportam essa propriedade ou 
+aplicam as mesmas técnicas de renderização*/
+html,
+body {
+    height: 100vh;
+    font-family: "Inter", sans-serif;
+    text-rendering: optimizeLegibility;
+    background-color: var(--project-background-color);
+}
+
+/* OBS-3: "gap: 24px" Essa propriedade define o espaçamento entre
+os itens em um contêiner flexível*/
+body {
+    /*----* ↑ * → * ↓ * ← *----*/
+    padding: 3% 3% 1% 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+input,
+textarea,
+button {
+    font-family: inherit;
+}
+
+.app-wrapper {
+    display: flex;
+    height: 100%;
+    gap: 40px;
+}
+
+.logo-alura,
+.btn-encrypt,
+.btn-decrypt {
+    /*O texto não pode ser selecionado no Mozilla Firefox*/
+    -moz-user-select: none;
+    /*Isso define que o texto não pode ser selecionado no 
+motor de renderização KHTML, usado principalmente pelo antigo navegador Konqueror.*/
+    -khtml-user-select: none;
+    /*Isso define que o texto não pode ser selecionado nos navegadores que utilizam o 
+motor de renderização WebKit, como o Google Chrome, Safari e outros.*/
+    -webkit-user-select: none;
+    /*Isso define que o texto não pode ser selecionado no Internet Explorer e no 
+Microsoft Edge*/
+    -ms-user-select: none;
+    /*Essa declaração é a forma padrão e define que o texto não pode ser selecionado em 
+navegadores que não reconhecem os prefixos de navegador mencionados acima.*/
+    user-select: none;
+}
+
+.header-firstSection-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 40px;
+}
+
+header {
+    margin: 0% 0% 0% 3%;
+}
+
+#logo-alura {
+    max-height: 48px;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0% 0% 0% 18%;
+    padding-bottom: 32px;
+}
+
+textarea {
+    border: none;
+    /*É específica para o navegador WebKit (como o Safari e o antigo Chrome) e 
+define uma sombra ao redor de um elemento.*/
+    -webkit-box-shadow: none;
+    /*É específica para o navegador Mozilla (como o Firefox) e também 
+define uma sombra ao redor de um elemento.*/
+    -moz-box-shadow: none;
+    /*É a forma padrão de definir uma sombra em um elemento, 
+aplicável à maioria dos navegadores modernos.*/
+    box-shadow: none;
+
+    min-height: 30vh;
+    height: 100%;
+    width: 100%;
+    max-width: 680px;
+    /*É usada para controlar se um elemento pode ser redimensionado pelo usuário.*/
+    resize: none;
+    background: transparent;
+    /* "rem"(root em)*/
+    font-size: 3.2rem;
+    text-transform: lowercase;
+    line-height: 4.3rem;
+    color: var(--button-criptografar-and-text-color);
+}
+
+textarea:focus {
+    outline: none;
+}
+
+/*OBS-4: Config exclusiva para o Placeholder*/
+textarea::placeholder {
+    text-transform: none;
+    color: var(--gray-300-color);
+}
+
+.btns {
+    width: 100%;
+    max-width: 680px;
+    margin-top: 32px;
+}
+
+.attention {
+    /*-----*↑↓**→←*----*/
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.attention img {
+    height: 1.8rem;
+}
+
+.attention span {
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+    color: var(--gray-400-color);
+}
+
+.btns-encrypt-decrypt {
+    display: flex;
+}
+
+/*Ela seleciona todos os botões, exceto o último botão filho direto de 
+.btns-encrypt-decrypt. Esses botões selecionados recebem uma margem à 
+direita de 12px, criando um espaço entre eles.*/
+.btns-encrypt-decrypt > .btn:not(:last-child) {
+    margin-right: 12px;
+}
+
+/*Nesse caso, ele seleciona o último botão filho direto. Esse botão
+selecionado recebe uma margem à esquerda de 12px, criando um espaço à esquerda.*/
+.btns-encrypt-decrypt > .btn:last-child {
+    margin-left: 12px;
+}
+
+.btn {
+    padding: 24px;
+    border-radius: 24px;
+    width: 100%;
+    min-width: 168px;
+    max-width: 328px;
+    font-size: 1.6rem;
+    transition: all 0.15s;
+}
+
+.encrypt {
+    background: var(--button-criptografar-and-text-color);
+    border: none;
+    color: var(--white-color);
+}
+
+.decrypt {
+    background-color: var(--button-descriptografar-color);
+    border: 1px solid var(--button-criptografar-and-text-color);
+    color: var(--button-criptografar-and-text-color);
+}
+
+@media (hover: hover) {
+    .btn:hover {
+        opacity: 0.7;
+        transform: scale(1.009);
+        cursor: pointer;
+    }
+}
+
+.btn:active {
+    transform: scale(1);
+    transform: translateY(1.5px);
+}
+
+.output {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 399px;
+    max-width: 680px;
+    width: 399px;
+    height: 100%;
+    padding: 32px;
+    gap: 32px;
+
+    background: var(--white-color);
+
+    box-shadow: 0px 24px 32px -8px rgba(0, 0, 0, 0.08);
+    border-radius: 32px;
+}
+
+.msg-output {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.msg-output p {
+    /*Especifica como as palavras longas devem ser quebradas e 
+exibidas quando não houver espaço suficiente em uma linha. 
+A opção break-word permite que as palavras sejam quebradas 
+em qualquer ponto dentro da palavra para caber no contêiner.*/
+    word-wrap: break-word;
+    /*Controla como o espaço em branco dentro de um elemento é 
+tratado. A opção pre-wrap preserva tanto os espaços em branco 
+normais quanto as quebras de linha. Isso significa que os espaços
+em branco serão mantidos e as quebras de linha serão respeitadas*/
+    white-space: pre-wrap;
+    /*especifica como as palavras longas devem ser quebradas e 
+exibidas quando não houver espaço suficiente em uma linha.*/
+    word-break: break-word;
+    font-size: 2.4rem;
+    line-height: 3.4rem;
+}
+
+/* Remove o overflow de texto vertical na mensagem de resultado em desktops */
+@media (min-width: 1024px) and (max-height: 1080px) {
+    .msg-output p {
+        display: -webkit-box;
+        -webkit-line-clamp: 20; /* número de linhas que você quer exibir */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-clamp: 20; /* Propriedade padrão para melhor compatibilidade */
+        box-orient: vertical; /* Propriedade padrão para melhor compatibilidade */
+    }
+}
+
+
+
+@media (min-width: 1024px) and (max-height: 768px) {
+    .msg-output p {
+        display: -webkit-box;
+        -webkit-line-clamp: 14; /* número de linhas que você quer exibir */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-clamp: 14; /* Propriedade padrão para melhor compatibilidade */
+        box-orient: vertical; /* Propriedade padrão para melhor compatibilidade */
+    }
+}
+
+
+.msg-output button {
+    margin-top: 32px;
+}
+
+.msgNotFound,
+.msg-copied {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+}
+
+.imgMsgNotFound {
+    margin-bottom: 32px;
+}
+
+.msgNotFound h3 {
+    font-size: 2.4rem;
+    line-height: 2.9rem;
+    font-weight: bold;
+    color: var(--gray-500-color);
+}
+
+.msg-copied h3 {
+    font-size: 2.4rem;
+    line-height: 2.9rem;
+    font-weight: bold;
+    color: var(--current-method-primary-color);
+}
+
+.msgNotFound p {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    color: var(--gray-400-color);
+    margin-top: 1.6rem;
+}
+
+.copy {
+    background: var(--white-color);
+    border: 1px solid var(--button-criptografar-and-text-color);
+    color: var(--button-criptografar-and-text-color);
+}
+
+.copy {
+    margin-top: 32px;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+footer ul {
+    display: flex;
+    gap: 9px;
+    list-style: none;
+    font-size: 1rem;
+    color: var(--gray-400-color);
+}
+
+footer img {
+    height: 10px;
+}
+
+footer a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    transition: all 0.15ms;
+}
+
+footer a:hover {
+    opacity: 0.7;
+    transform: scale(1.009);
+    cursor: pointer;
+}
+
+footer a:active {
+    transform: scale(1);
+    transform: translateY(1px);
+}
+
+footer a:link {
+    color: var(--gray-400-color);
+}
+
+/*a declaração define a cor do texto dos links já visitados dentro de um elemento*/
+footer a:visited {
+    color: var(--button-criptografar-and-text-color);
+}
+
+/* Responsividade */
+/* Define a largura mínima que um elemento deve ter para que a regra de estilo seja aplicada*/
+/* Telas com Largura mínima de 1920px*/
+@media (min-width: 1920px) {
+    .input {
+        margin: 0% 0% 0% 24%;
+    }
+}
+
+/* Define a largura máxima que um elemento deve ter para que a regra de estilo seja aplicada*/
+/* Telas com Largura máxima de 1023px*/
+@media (max-width: 1023px) {
+    :root {
+        font-size: 54%;
+    }
+
+    body {
+        padding: 5% 5% 2% 5%;
+    }
+
+    header {
+        margin: 12px 0 0 0;
+    }
+
+    .app-wrapper {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .app-wrapper {
+        height: auto;
+    }
+
+    .header-firstSection-wrapper {
+        align-items: baseline;
+    }
+
+    .input {
+        margin: 0;
+        padding-bottom: 0;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn {
+        padding: 21px;
+        max-width: none;
+    }
+
+    .btn-encrypt-decrypt > .btn:not(:last-child) {
+        margin-right: 9px;
+    }
+
+    .btn-encrypt-decrypt > .btn:last-child {
+        margin-left: 9px;
+    }
+
+    .output {
+        min-width: 0px;
+        width: 100%;
+        padding: 24px;
+    }
+
+    /*Remove a Imagem da Tela*/
+    .imgMsgNotFound {
+        display: none;
+    }
+}
+
+/* Telas com Largura máxima de 424px*/
+@media (max-width: 424px) {
+    /*Redimensionado horizontalmente*/
+    textarea {
+        resize: horizontal;
+    }
+
+    .btn {
+        min-width: none;
+        max-width: none;
+    }
+
+    .btns-encrypt-decrypt {
+        flex-direction: column;
+    }
+
+    .btns-encrypt-decrypt > .btn:not(:last-child) {
+        margin-bottom: 12px;
+        margin-right: 0px;
+    }
+
+    .btns-encrypt-decrypt > .btn:last-child {
+        margin-left: 0px;
+    }
+
+    footer {
+        padding-bottom: 3%;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        -webkit-opacity: 0;
+        -moz-opacity: 0;
+        -ms-opacity: 0;
+        -o-opacity: 0;
+        opacity: 0;
+    }
+    100% {
+        -webkit-opacity: 1;
+        -moz-opacity: 1;
+        -ms-opacity: 1;
+        -o-opacity: 1;
+        opacity: 1;
+    }
+}
+
+.fade-in,
+body {
+    animation: fadeIn 0.5s;
+    -webkit-animation: fadeIn 0.5s;
+    -moz-animation: fadeIn 0.5s;
+    -o-animation: fadeIn 0.5s;
+    -ms-animation: fadeIn 0.5s;
+}
+
+@media (max-width: 700px) {
+    .tamanho-da-tela {
+        flex-direction: column-reverse;
+    }
+}
