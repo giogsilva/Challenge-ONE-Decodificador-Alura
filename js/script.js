@@ -3,85 +3,48 @@ let btnEncrypt = document.getElementById("encrypt");
 let btnDecrypt = document.getElementById("decrypt");
 let showResultTimeout;
 
-//encrypt decrypt
+// Encrypt / Decrypt
 function getMessage() {
     return document.getElementById("msg-input").value;
 }
 
 function encryptAlura(initialMessage) {
-    let finalMessage = "";
-    for (let char of initialMessage) {
-        switch (char) {
-            case "a":
-                finalMessage += "ai";
-                break;
-
-            case "ã":
-                finalMessage += "ai";
-                break;
-
-            case "á":
-                finalMessage += "ai";
-                break;
-
-            case "à":
-                finalMessage += "ai";
-                break;
-
-            case "e":
-                finalMessage += "enter";
-                break;
-
-            case "é":
-                finalMessage += "enter";
-                break;
-
-            case "i":
-                finalMessage += "imes";
-                break;
-
-            case "í":
-                finalMessage += "imes";
-                break;
-
-            case "o":
-                finalMessage += "ober";
-                break;
-
-            case "õ":
-                finalMessage += "ober";
-                break;
-
-            case "ó":
-                finalMessage += "ober";
-                break;
-
-            case "u":
-                finalMessage += "ufat";
-                break;
-
-            case "ú":
-                finalMessage += "ufat";
-                break;
-
-            default:
-                finalMessage += char;
-                break;
-        }
-    }
-    return finalMessage;
+    const mappings = {
+        'a': 'ai',
+        'ã': 'ai',
+        'á': 'ai',
+        'à': 'ai',
+        'e': 'enter',
+        'é': 'enter',
+        'i': 'imes',
+        'í': 'imes',
+        'o': 'ober',
+        'õ': 'ober',
+        'ó': 'ober',
+        'u': 'ufat',
+        'ú': 'ufat'
+    };
+    
+    return initialMessage.split('').map(char => mappings[char] || char).join('');
 }
 
 function decryptAlura(encryptedMessage) {
-    encryptedMessage = encryptedMessage.replaceAll("ai", "a");
-    encryptedMessage = encryptedMessage.replaceAll("enter", "e");
-    encryptedMessage = encryptedMessage.replaceAll("imes", "i");
-    encryptedMessage = encryptedMessage.replaceAll("ober", "o");
-    encryptedMessage = encryptedMessage.replaceAll("ufat", "u");
+    const mappings = {
+        'ai': 'a',
+        'enter': 'e',
+        'imes': 'i',
+        'ober': 'o',
+        'ufat': 'u'
+    };
+    
+    for (const [key, value] of Object.entries(mappings)) {
+        encryptedMessage = encryptedMessage.replaceAll(key, value);
+    }
+    
     return encryptedMessage;
 }
 
-//Mostrar Resultado e botão de copy
+// Show Result and Copy Button
 function showResult(outputMsg) {
     let outputSection = document.getElementById("output");
 
@@ -100,15 +63,14 @@ function copyToClipboard() {
     navigator.clipboard.writeText(msgOutput);
 
     let resultSection = document.getElementById("output");
-    let height =
-        resultSection.getElementsByClassName("msg-output")[0].clientHeight;
+    let height = resultSection.getElementsByClassName("msg-output")[0].clientHeight;
 
     resultSection.innerHTML = `
     <div class="msg-copied fade-in" style="min-height: ${height}px">
         <h3>Mensagem copiada</h3>
     </div>
     `;
-    showResultTimeout = setTimeout(function () {
+    showResultTimeout = setTimeout(() => {
         showResult(msgOutput);
     }, 1500);
 }
@@ -125,54 +87,48 @@ function warnNoMessageFound() {
     `;
 }
 
-//Implementando Métodos para criptografia
+// Implementing Methods for Encryption and Decryption
 function encrypt() {
     clearTimeout(showResultTimeout);
 
     let initialMessage = getMessage();
 
-    if (initialMessage == "") {
+    if (!initialMessage) {
         warnNoMessageFound();
         return;
     }
 
-    let finalMessage = "";
-    finalMessage = encryptAlura(initialMessage);
-
+    let finalMessage = encryptAlura(initialMessage);
     showResult(finalMessage);
 }
 
 function decrypt() {
     clearTimeout(showResultTimeout);
+    
     let encryptedMessage = getMessage();
-    let finalMessage = encryptedMessage;
 
-    let encryptRegexAlura = new RegExp("^.*(ai|enter|imes|ober|ufat).*$");
-    let encryptedMessageAlura = encryptRegexAlura.test(finalMessage);
-
-    if (finalMessage == "") {
+    if (!encryptedMessage) {
         warnNoMessageFound();
         return;
     }
 
-    if (!encryptedMessageAlura) {
+    let isEncrypted = /ai|enter|imes|ober|ufat/.test(encryptedMessage);
+
+    if (!isEncrypted) {
         warnNoMessageFound();
         return;
     }
 
-    finalMessage = decryptAlura(encryptedMessage);
-
+    let finalMessage = decryptAlura(encryptedMessage);
     showResult(finalMessage);
 }
 
-//Ação para mudar a logo ao Click
-var change = true;
+// Change Logo on Click (Add logic if needed)
 function changeLogo() {
-    let logo = document.getElementById("logo-alura");
-
+    // Add logic to change logo here
 }
 
-//Aplicando os Métodos
+// Apply Methods
 logoAlura.onclick = changeLogo;
 btnEncrypt.onclick = encrypt;
 btnDecrypt.onclick = decrypt;
